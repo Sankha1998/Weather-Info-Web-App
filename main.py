@@ -1,9 +1,7 @@
-from flask import Flask,redirect
-from flask import render_template,request,make_response
+from flask import Flask,render_template,request,make_response,redirect,Response
 from webscraping import Web_Scraping
 import pandas as pd
-import time
-import lxml
+
 
 
 app= Flask(__name__)
@@ -45,11 +43,11 @@ def get_data(city_name):
     df['humidity'] = humidity
     df['precipitation'] = precipitation
     filename = city_name + '.csv'
-    resp = make_response(df.to_csv())
-    resp.headers["Content-Disposition"] = "attachment; filename={}".format(filename)
-    resp.headers["Content-Type"] = "text/csv"
-    return resp
-
+    return Response(
+        df.to_csv(),
+        mimetype="text/csv",
+        headers={"Content-disposition":
+                     "attachment; filename={}".format(filename)})
 
 
 if __name__=="__main__":
