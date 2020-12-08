@@ -2,8 +2,7 @@
 
 # Weather-Info-Web-App : [view](https://weather-info.herokuapp.com/ )
 
-Weather Info, this web app provides services related to the predicted weather reports in different cities in India as well as a predicted weather reports in some foreign cities.
-Apart from that this web app also provides scraped data from [timeanddate](https://www.timeanddate.com)
+Weather Info,a web app buid in python flask, provides services related to the predictions of weather in different cities in India as well as in some foreign cities. And it's provides weather data in CSV format.
 
 
 ![Screenshot](webapp_view.gif)
