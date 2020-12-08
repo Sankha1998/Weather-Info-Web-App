@@ -1,10 +1,27 @@
-<img src=https://img.shields.io/badge/build%20with-python-yellow><img src="https://img.shields.io/badge/Dash-yellow"><img src="https://img.shields.io/badge/-HTML5-orange"><img src="https://img.shields.io/badge/-Bootstrap-blueviolet"> <img src=https://img.shields.io/badge/using-flask-green><img src="https://img.shields.io/badge/jinja-red"> <img src="https://img.shields.io/badge/deployed%20in-Heroku-blue"> <img src="https://img.shields.io/badge/domain-Web%20Scraping-orange.svg">
 
 
+# Weather-Info-Web-App : [click](https://weather-info.herokuapp.com/ )
 
-# Weather-Info-Web-Appweather 
+Weather Info, this web app provides services related to the predicted weather reports in different cities in India as well as a predicted weather reports in some foreign cities.
+Apart from that this web app also provides scraped data from [timeanddate](https://www.timeanddate.com)
 
-Weather Info, this web app provides services related to predicted weather report in different cities in india as well as predicted weather report of some forgine cities.
-Apart from that this web app also provides scraped data from https://www.timeanddate.com 
+
+![Screenshot](webapp_view.gif)
+
+## Part 1: Web scraping
+
+Weather data has been scraped from [timeanddate](https://www.timeanddate.com) and this particular step is done every day to get the predicted weather data for the next 24 hours.
+[webscraping.py](https://github.com/Sankha1998/Weather-Info-Web-App/blob/main/webscraping.py) contains all the required codes for scraping worldwide weather information data of famous cities.
+On the other hand, Indian city-wise data is first getting stored in CSV format in a separate [dash app](https://weatherinfo-ssm.herokuapp.com/).
+
+All the predicted weather data of popular Indian cities, stored in CSV format also available for download.
+
+## Part 2: Web App Making 
+
+World wide predicted weather report is getting scraped and visualized in a table when a user is requesting to view the data in the web app instantly. But in the case of Indian cities data, it's reading from a CSV file as mentioned above. Now, this web app is made in flask and dash [see]https://github.com/Sankha1998/weather-info-dash-app). The dashboard of Weather Prediction in Indian cities has built using Plotly-dash and deployed in Heroku separately. The remaining part of this web app is built in python-flask micro-framework.
+
+## Part 3: Deployment
+
+The entire web is again deployed in Heroku.
 
 
