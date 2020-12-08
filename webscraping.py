@@ -1,8 +1,7 @@
-
 from bs4 import BeautifulSoup as bs
 import requests
 
-
+import lxml
 
 class Web_Scraping:
     def __init__(self):
@@ -16,41 +15,19 @@ class Web_Scraping:
             try:
                 x = (i.find('th').text).replace(u'\xa0', '')
                 if x != 'Time':
-                    times.append(x[:5])  # time
+                    i = x[:5]
+                    if float(i)>=12:
+                        times.append(i + 'PM')     # time
+                    else:
+                        times.append(i + 'AM')
                 else:
                     pass
             except:
                 pass
-        new_time = []
-        for i in times[1:]:
-            try:
-                if float(i) >= 12:
-                    new_time.append(i + 'PM')
-                else:
-                    new_time.append(i + 'AM')
-            except:
-                pass
-        return new_time
 
-    def city_feel_temp(self,soup):
-        """Feel Temperature scraping """
-        feel_temp = []
-        for i in soup.find_all('tr'):
-            try:
-                feel_temp.append(int(i.find('td', class_='sep').text.strip('°C').replace(u'\xa0', ''))) # feels like
-            except:
-                pass
-        return feel_temp
+        return times
 
-    def city_weather(self,soup):
-        """ weather condition scraping"""
-        weather = []
-        for i in soup.find_all('tr'):
-            try:
-                weather.append((i.find('td', class_='small')).text)
-            except:
-                pass
-        return weather
+
 
     def city_rain(self,soup):
         """ precipitation scraping"""
@@ -74,6 +51,7 @@ class Web_Scraping:
                 raw_data.append(a)
         """
         daily temperature, wind speed,humidity"""
+
         temp_d = []
         wind_speed = []
         humidity = []
@@ -99,21 +77,19 @@ class Web_Scraping:
             humidity.append(raw_data[i].strip() + '%')
         return temp_d,wind_speed,humidity
 
+
     def city_scraping(self, city):
         url = "https://www.timeanddate.com/weather/india/{}/hourly".format(city)
         response = requests.get(url, headers=self.headers).text
         soup = bs(response, 'lxml')
-
-        new_time = self.city_times(soup=soup)
-        feel_temp = self.city_feel_temp(soup=soup)
-        weather = self.city_weather(soup=soup)
+        time = self.city_times(soup=soup)
         more_info = self.city_more_info(soup=soup)
         temp_d = more_info[0]
         wind_speed = more_info[1]
         humidity = more_info[2]
         precipitation = self.city_rain(soup=soup)
 
-        return new_time, feel_temp, weather, temp_d, wind_speed, humidity, precipitation
+        return time, temp_d, wind_speed, humidity, precipitation
 
 
 
