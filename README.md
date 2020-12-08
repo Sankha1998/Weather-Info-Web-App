@@ -1,6 +1,6 @@
 
 
-# Weather-Info-Web-App : [click](https://weather-info.herokuapp.com/ )
+# Weather-Info-Web-App : [view](https://weather-info.herokuapp.com/ )
 
 Weather Info, this web app provides services related to the predicted weather reports in different cities in India as well as a predicted weather reports in some foreign cities.
 Apart from that this web app also provides scraped data from [timeanddate](https://www.timeanddate.com)
