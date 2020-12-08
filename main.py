@@ -1,16 +1,16 @@
-from flask import Flask,render_template,request,make_response,redirect,Response
+from flask import Flask,render_template,redirect,request
+import requests
 from webscraping import Web_Scraping
 import pandas as pd
-
-
+import urllib
+import json
 
 app= Flask(__name__)
 
-
-
-
 cities=['kolkata','agartala','bangalore','bhubaneswar','chennai',
         'delhi','hyderabad','indore','jaipur','kanpur','lucknow','mumbai','nagpur','nainital','noida','pune','surat','visakhapatnam']
+
+
 @app.route('/')
 def home():
     return render_template('index.html',cities=cities)
@@ -33,21 +33,8 @@ def city_report():
 
 @app.route('/getdata/<string:city_name>')
 def get_data(city_name):
-    city_weather_info = Web_Scraping()
-    time, temp_d,humidity, precipitation = city_weather_info.city_scraping(
-        city=city_name)
-
-
-    data = {'time': time,'temperature': temp_d,'humidity':humidity,'precipitation':precipitation}
-
-    df = pd.DataFrame(data)
-    filename = city_name + '.csv'
-    return Response(
-        df.to_csv(index=False),
-        mimetype="text/csv",
-        headers={"Content-disposition":
-                     "attachment; filename={}".format(filename)})
-
+    data_url = 'https://weatherinfo-ssm.herokuapp.com/static/data/{}.csv'.format(city_name)
+    return redirect(data_url)
 
 if __name__=="__main__":
     app.run(debug=True)
