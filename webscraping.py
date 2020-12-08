@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup as bs
 import requests
 
-import lxml
+
 
 class Web_Scraping:
     def __init__(self):
@@ -15,9 +15,9 @@ class Web_Scraping:
             try:
                 x = (i.find('th').text).replace(u'\xa0', '')
                 if x != 'Time':
-                    i = x[:5]
+                    i =x[:5]
                     if float(i)>=12:
-                        times.append(i + 'PM')     # time
+                        times.append(i + 'PM')
                     else:
                         times.append(i + 'AM')
                 else:
@@ -27,7 +27,25 @@ class Web_Scraping:
 
         return times
 
+    def city_feel_temp(self,soup):
+        """Feel Temperature scraping """
+        feel_temp = []
+        for i in soup.find_all('tr'):
+            try:
+                feel_temp.append(int(i.find('td', class_='sep').text.strip('°C').replace(u'\xa0', ''))) # feels like
+            except:
+                pass
+        return feel_temp
 
+    def city_weather(self,soup):
+        """ weather condition scraping"""
+        weather = []
+        for i in soup.find_all('tr'):
+            try:
+                weather.append((i.find('td', class_='small')).text.strip('.'))
+            except:
+                pass
+        return weather
 
     def city_rain(self,soup):
         """ precipitation scraping"""
@@ -40,29 +58,6 @@ class Web_Scraping:
             precipitation.append(p[i])
         return precipitation
 
-    def city_more_info(self,soup):
-        raw_data = []
-        for i in soup.find_all('td', class_=""):
-            a = (i.text).replace(u'\xa0', '').strip()
-            a = a.strip('%')
-            a = a.strip('°C')
-            if (a != '↑' and a != '-') and len(a) < 4:
-                raw_data.append(a)
-        """
-        daily temperature, wind speed,humidity"""
-
-        temp_d = []
-        humidity = []
-        l = len(raw_data)
-        for i in range(0, l, 3):
-            try:
-                temp_d.append(int(raw_data[i]))
-            except:
-                pass
-
-        for i in range(2, l, 3):
-            humidity.append(raw_data[i].strip() + '%')
-        return temp_d,humidity
 
 
     def city_scraping(self, city):
@@ -70,13 +65,11 @@ class Web_Scraping:
         response = requests.get(url, headers=self.headers).text
         soup = bs(response, 'lxml')
         time = self.city_times(soup=soup)
-        more_info = self.city_more_info(soup=soup)
-        temp_d = more_info[0]
-        wind_speed = more_info[1]
-        humidity = more_info[2]
+        feel_temp = self.city_feel_temp(soup=soup)
+        weather = self.city_weather(soup=soup)
         precipitation = self.city_rain(soup=soup)
 
-        return time, temp_d, wind_speed, humidity, precipitation
+        return time, feel_temp, weather, precipitation
 
 
 
@@ -98,5 +91,6 @@ class Web_Scraping:
                 pass
 
         return contries, temp
+
 
 
