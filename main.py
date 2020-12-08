@@ -36,16 +36,14 @@ def city_report():
 @app.route('/getdata/<string:city_name>')
 def get_data(city_name):
     city_weather_info = Web_Scraping()
-    new_time, feel_temp, weather, temp_d, wind_speed, humidity, precipitation = city_weather_info.city_scraping(
+    new_time, temp_d, wind_speed, humidity, precipitation = city_weather_info.city_scraping(
         city=city_name)
     df = pd.DataFrame()
     df['time'] = new_time
     df['temperature'] = temp_d
-    df['feels_like'] = feel_temp
     df['wind speed'] = wind_speed
     df['humidity'] = humidity
     df['precipitation'] = precipitation
-    df['weather'] = weather
     filename = city_name + '.csv'
     resp = make_response(df.to_csv())
     resp.headers["Content-Disposition"] = "attachment; filename={}".format(filename)
