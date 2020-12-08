@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<body class="bgchangable">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <img class="d-block w-100" src="/static/img/img2.gif" alt="First slide" height="300px;"width="80%;"><br>
+            <div class=" text-center centertext"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center text-info">
+            <h4><strong>Experience Weather Info Services :</strong></h4><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+                <div class="card cardbgcolor text-center" style="width: 22rem;">
+                     <a href="{{url_for('worldweather')}}">
+                        <img src="/static/img/img1.jpg" class="card-img-top imgeffect"  width="80%;" height="300em;">
+                        <p class="card-text btn text-danger">World Weather</p>
+                     </a>
+                </div>
+        </div>
+        <div class="col-md-4">
+                <div class="card cardbgcolor text-center" style="width: 22rem;">
+                    <a href="{{url_for('city_report')}}">
+                        <img src="/static/img/img3.jpg" class="card-img-top imgeffect"  width="80%;" height="300em;">
+                        <p class="card-text btn text-danger">Indian Weather</p>
+                    </a>
+                </div>
+        </div>
+        <div class="col-md-4">
+                <div class="card cardbgcolor text-center" style="width: 22rem;">
+                    <img src="/static/img/img4.jpg" class="card-img-top imgeffect"  width="80%;" height="300em;">
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle text-danger" style="width:100%;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
+                            Select a City
+                        </button>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            {% for city in cities %}
+                            <a class="dropdown-item" href="{{url_for('get_data', city_name = city)}}">{{city}}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+    </div>
+</div>
+
+</body>
+{% endblock %}

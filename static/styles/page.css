@@ -1,0 +1,93 @@
+.bgcolor{
+background: #0F2027;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+.footer_color{
+background-color:#eee;
+}
+
+
+.imgeffect{
+transition: transform .2s;
+}
+
+.imgeffect:hover{
+transform: scale(0.75);
+}
+
+.centertext:before {
+content: ' ';
+font-size: 1.2em;
+position: absolute;
+left: 0%;
+top: 0%;
+right: 0%;
+bottom: 40%;
+margin: auto;
+height:25px;
+animation: animation1 5s steps(8);
+overflow: hidden;
+white-space: nowrap;
+width: 0ch;
+animation-iteration-count: infinite;
+color: #fff;
+border-right: .15em orange solid;
+}
+@keyframes animation1 {
+  0% {
+  width: 0ch;
+  content:'';
+  }
+  20%{
+  width: 3ch;
+  content: 'Wea'
+  }
+  40%{
+  width: 7ch;
+  content:'Weather'
+  }
+  60%{
+  width: 9ch;
+  content:'Weather In'
+  }
+  80% {
+  width: 11ch;
+  content:'Weather Info'
+  }
+  100% {
+  width: 11ch;
+  text:'Weather Info'
+  }
+}
+
+.bgchangable {
+
+color:black;
+animation: animation2 10s infinite;
+}
+
+@keyframes animation2 {
+0% {background: #A1FFCE;
+background: -webkit-linear-gradient(to top, #FAFFD1, #A1FFCE);
+background: linear-gradient(to top, #FAFFD1, #A1FFCE);
+}
+25%{background: #A1FFCE;
+background: -webkit-linear-gradient(to bottom, #FAFFD1, #A1FFCE);
+background: linear-gradient(to bottom, #FAFFD1, #A1FFCE);
+}
+50%{background: #A1FFCE;
+background: -webkit-linear-gradient(to left, #FAFFD1, #A1FFCE);
+background: linear-gradient(to left, #FAFFD1, #A1FFCE);
+}
+75%{background: #A1FFCE;
+background: -webkit-linear-gradient(to right, #FAFFD1, #A1FFCE);
+background: linear-gradient(to right, #FAFFD1, #A1FFCE);
+}
+100% {background: #A1FFCE;
+background: -webkit-linear-gradient(to top, #FAFFD1, #A1FFCE);
+background: linear-gradient(to top, #FAFFD1, #A1FFCE);
+}
+}

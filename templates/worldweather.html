@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="table-responsive table-borderless">
+<table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"><b>Country Name</b></th>
+      <th scope="col"><b>Temperature</b></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for slno, country_name, temp in countries_temp%}
+    <tr>
+      <th scope="row">{{slno}}</th>
+      <td class="table-light text-success">{{country_name}}</td>
+      <td class="table-light text-info">{{temp}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% endblock %}
