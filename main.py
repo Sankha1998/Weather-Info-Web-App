@@ -46,7 +46,6 @@ def get_data(city_name):
     df['humidity'] = humidity
     df['precipitation'] = precipitation
     df['weather'] = weather
-    time.sleep(5)
     filename = city_name + '.csv'
     resp = make_response(df.to_csv())
     resp.headers["Content-Disposition"] = "attachment; filename={}".format(filename)
