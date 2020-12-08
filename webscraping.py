@@ -45,7 +45,6 @@ class Web_Scraping:
         for i in soup.find_all('td', class_=""):
             a = (i.text).replace(u'\xa0', '').strip()
             a = a.strip('%')
-            a = a.strip('km/h')
             a = a.strip('°C')
             if (a != '↑' and a != '-') and len(a) < 4:
                 raw_data.append(a)
@@ -53,29 +52,17 @@ class Web_Scraping:
         daily temperature, wind speed,humidity"""
 
         temp_d = []
-        wind_speed = []
         humidity = []
-
         l = len(raw_data)
-
         for i in range(0, l, 3):
             try:
                 temp_d.append(int(raw_data[i]))
             except:
                 pass
 
-        for i in range(0, len(temp_d)):
-            try:
-                temp_d[i] = int(temp_d[i])
-            except:
-                pass
-
-        for i in range(1, l, 3):
-            wind_speed.append(raw_data[i].strip() + 'km/h')
-
         for i in range(2, l, 3):
             humidity.append(raw_data[i].strip() + '%')
-        return temp_d,wind_speed,humidity
+        return temp_d,humidity
 
 
     def city_scraping(self, city):
