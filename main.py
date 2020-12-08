@@ -44,7 +44,7 @@ def get_data(city_name):
     df['precipitation'] = precipitation
     filename = city_name + '.csv'
     return Response(
-        df.to_csv(),
+        df.to_csv(index=False),
         mimetype="text/csv",
         headers={"Content-disposition":
                      "attachment; filename={}".format(filename)})
